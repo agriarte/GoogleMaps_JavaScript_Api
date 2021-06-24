@@ -1,0 +1,6 @@
+{
+	"appId": "io.ionic.starter",
+	"appName": "GoogleMaps_JavaScript_Api",
+	"webDir": "www",
+	"bundledWebRuntime": false
+}
