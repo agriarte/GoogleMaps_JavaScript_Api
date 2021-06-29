@@ -1,0 +1,20 @@
+<div class="miCssMaps" style="height: 500px;">
+<p>
+  Comienza componente que muestra mapa <br>
+  Desde https://console.cloud.google.com en Biblioteca de Api se tiene que habilitar Google Maps JavaScript Api <br>
+  y generar una key que nos autorice a utilizar googlemaps<br>
+  En el proyecto Ionic, buscar archivo index.html en src/ y añadir esto justo dentro del HEAD: <br>
+  &lt;script src='https://maps.googleapis.com/maps/api/js?libraries=places&key=MI_KEY_AQUI'&gt; &lt;/script&gt;
+
+ </p>
+
+ <p>GoogleMaps</p>
+ <p>posicion: {{posicion}}</p>
+ Importante poner altura al div del map o no se mostrará. Cuidado con las medidas por porcentaje.
+ Si no se visualiza usar pixeles.
+ <div #map id="map" style="height: 100%"></div>
+</div>
+
+
+
+
