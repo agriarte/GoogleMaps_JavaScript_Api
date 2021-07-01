@@ -1,5 +1,16 @@
 <div class="miCssGeopos">
-  <small>[Aquí comienza MostrarGPSComponent, hijo de HomePage]</small>
+  <small>[Aquí comienza MostrarGPSComponent, hijo de HomePage]</small><br>
+  <small>Para practicar recibo un atributo,llamado texto del componente padre</small>
+  <small>en el ts del hijo pongo un @input y en el html del padre inserto el atributo a enviar dentro del
+    selector del hijo en el template del padre</small><br>
+
+  <!-- comunicación padres a hijos -->
+  <!-- el input del ts actualiza en todo momento el atributo variabledelhijo -->
+  <small>Aquí un envío padre-hijo = <span style="color: red;">{{variableDelHijo}}</span></small><br>
+
+  <!-- comunicacion entre hijos y padres
+  Requiere en el ts: output, eventEmitter y en el html del padre: recibir evento en el selector del hijo -->
+  <ion-button (click)="doCambiarPadre()" color="warning" size="small" type="submit">Enviar texto al padre</ion-button>
 
   <ion-grid class="ion-no-padding">
     <ion-row>
@@ -46,7 +57,9 @@
     </ion-row>
   </ion-grid>
 
-  <small>[TODO: Falta enviar datos entre componentes y poner algun ReactiveForm para recordar como trabaja]</small>
+  <small style="color: blue;">[PRUEBA DE VARIABLE COMUN: {{numeroComun}}]</small>
+
+
 
 
 </div>

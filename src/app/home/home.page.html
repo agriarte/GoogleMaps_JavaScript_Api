@@ -14,16 +14,53 @@
   </ion-header>
 
   <div class="ion-padding ion-text-left">
-    <br>
-    <strong>GoogleMaps con Api de JavaScript y Geolocation de Capacitor</strong>
-    <br>
-    <small>[Incluye algunos componentes anidados y TODO: paso de variables entre padres e hijos ]</small><br>
+
     <small>[Para crear nuevo proyecto: ionic start miNuevoProyecto blank --type=angular --capacitor]</small><br>
+
+    <div [style.background]="num1 > 10 ? 'red' : 'yellow' " style="height: 20px;">
+      <p>Introduce un número y un texto. Si el número es mayor de 10 habrá un cambio de background.color de este div</p>
+    </div>
+
+    <form style="margin-top: 30px;" [formGroup]="myForm" (ngSubmit)="doAlgo()">
+      <input type="number" formControlName="campoNumero" />
+      <input type="text" formControlName="campoTexto" />
+      <ion-button class="ion-no-margin" color="primary" size="small" type="submit"> Entrar </ion-button>
+    </form>
+
+    <p>botones modifican dinamicamente la propiedad num1</p>
+
+    <ion-button color="secondary" size="small" (click)="doIncrementa()">Suma 1</ion-button>
+    <ion-button color="secondary" size="small" (click)="doDecrementa()">Resta 1</ion-button>
+
+    <p>Aqui un atributo de la clase Home: {{texto}}</p>
+    <p>Aqui se replica el Form desde el mismo componente, binding por interpolacion: {{num1}} - {{texto1}}</p><br>
+
+    <strong>GoogleMaps con Api de JavaScript y Geolocation de Capacitor</strong><br>
+    <small>[Incluye algunos componentes anidados y paso de variables entre padres e hijos y entre sin relación por medio de observables y servicios]</small><br>
     <small>[A continuación entra en escena un componente hijo de HomePage. Es necesario declararlo en el module de
       HomePage]</small><br>
-    <app-mostrar-gps></app-mostrar-gps>
+    <br>
+    <p>A continuación una variable que cambiará de valor al pulsar el botón ENVIAR TEXTO AL PADRE. Se utiliza Output y
+      EvenEmitter: <span style="color: red;">{{variableViajera}}</span></p><br>
+
+      <p>El siguiente botón modifica una variable de otro componente por medio de services. Es una forma muy cómoda de
+      comunicarse entre componentes sin necesidad de input, output y evenEmitter</p>
+      <ion-button color="danger" size="small" (click)="doCambiaDatosServices()">Cambiar Variable y que se refresque entre componentes</ion-button>
+      <p style="color: blue;">Variable común a toda la APP. Se muestra en todos los componentes. Al pulsar botón coge valor entre 1 y 100. Valor inicial = {{numeroComun}}</p>
+
+    <!-- comunicación padres a hijos
+      de padres a hijos el input [variabledelhijo] es un atributo del componente hijo y variableViajera está
+      definida en este componente (padre) -->
+    <!-- comunicacion de hijos a padres
+    (cambioVariableDelHijo) viene del hijo con un evento. Es decir, se emite el dato dentro del $event que se
+    interpola dentro de variableViajera que es un atributo local de este componente -->
+    <app-mostrar-gps [variableDelHijo]="variableViajera" (cambioVariableDelHijo)="variableViajera= $event">
+    </app-mostrar-gps>
+
+
     <small>[Texto desde el Home Component: Aquí termina el componente de mostrar datos del gps. A continuación el
-      componente que muestra Googlemaps desde la ubicación actual. Está anidado dentro de Home. Recuerda declararlo en el module]</small>
+      componente que muestra Googlemaps desde la ubicación actual. Está anidado dentro de Home. Recuerda declararlo en
+      el module]</small>
     <app-mostrar-maps></app-mostrar-maps>
   </div>
 </ion-content>

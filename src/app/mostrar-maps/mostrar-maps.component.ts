@@ -15,6 +15,7 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 import { Geolocation } from '@capacitor/geolocation';
 //Atencion al import de ToastController, tiene que ser este: from '@ionic/angular';
 import { ToastController } from '@ionic/angular';
+import { DatosService } from '../services/datos.service';
 
 //si no reconoce google declararla previamente
 declare const google;
@@ -25,7 +26,7 @@ declare const google;
   styleUrls: ['./mostrar-maps.component.scss'],
 })
 
-export class MostrarMapsComponent implements OnInit{
+export class MostrarMapsComponent implements OnInit {
 
   //parecido a getElementbyId. En la vista HTML se refiere a #map no al id.
   @ViewChild('map', { static: false }) mapElement: ElementRef;
@@ -34,9 +35,11 @@ export class MostrarMapsComponent implements OnInit{
 
   posicion: string;//para interpolar en la vista
 
+  numeroComun: number; // variable local subscrita a la variable global del servicio
+
   //como Geolocation es estático no hace falta declararlo en el constructor
   //ejemplos docu oficial, en cambio, lo hace.
-  constructor(public toastController: ToastController) { }
+  constructor(public toastController: ToastController, public datosService: DatosService) { }
   ngOnInit(): void {
     this.getLocation();
   }
