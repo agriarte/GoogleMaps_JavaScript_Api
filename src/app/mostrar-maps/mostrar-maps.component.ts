@@ -9,6 +9,12 @@
 //En index.html encima de </head> agregar
 //<script src='https://maps.googleapis.com/maps/api/js?libraries=places&key=MI_KEY_AQUI'></script>
 
+//para Geolocation Capacitor en Android añadir:
+// <!-- Geolocation API -->
+// <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+// <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+// <uses-feature android:name="android.hardware.location.gps" />
+
 
 import { OnInit } from '@angular/core';
 import { Component, ElementRef, ViewChild } from '@angular/core';
@@ -35,7 +41,6 @@ export class MostrarMapsComponent implements OnInit {
 
   posicion: string;//para interpolar en la vista
 
-  numeroComun: number; // variable local subscrita a la variable global del servicio
 
   //como Geolocation es estático no hace falta declararlo en el constructor
   //ejemplos docu oficial, en cambio, lo hace.
@@ -49,6 +54,13 @@ export class MostrarMapsComponent implements OnInit {
     Geolocation.getCurrentPosition().then((coordenadas) => {
       this.posicion = 'Latitud: ' + coordenadas.coords.latitude + ' Longitud: ' + coordenadas.coords.longitude;
       this.presentToast(this.posicion);
+      //enviar datos a DatosService para compartir entre subscritos
+      this.datosService.changePrecision(coordenadas.coords.accuracy);
+      this.datosService.changeLatitud(coordenadas.coords.latitude);
+      this.datosService.changeLongitud(coordenadas.coords.longitude);
+      this.datosService.changeAltitud(coordenadas.coords.altitude);
+      this.datosService.changeRumbo(coordenadas.coords.heading);
+      this.datosService.changeVelocidad(coordenadas.coords.speed);
       //llamada al googlemap
       this.loadMap(coordenadas);
     });
